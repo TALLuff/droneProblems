@@ -29,12 +29,12 @@ const basicRoute = str => {
           break;
       }
     }
-    //Check for rotation the move through the array of directions then reassign direction
+    //Check for rotation, move through the array of directions then reassign direction
     else if (instruction === "L" || instruction === "R") {
       let rotate = instruction === "L" ? -1 : 1;
       let dirIndex = directions.indexOf(direction) + rotate;
       if (dirIndex === -1) dirIndex = 3;
-      if (dirIndex === 5) dirIndex = 0;
+      if (dirIndex === 4) dirIndex = 0;
       direction = directions[dirIndex];
     }
   });
