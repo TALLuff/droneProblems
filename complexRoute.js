@@ -17,49 +17,43 @@ const complexRoute = str => {
       if (dirIndex === 4) dirIndex = 0;
       direction = directions[dirIndex];
       //Move the drone the total number of +'s and -'s after summing them
-      let move =
-        (instruction.match(/\+/g) || []).length -
-        (instruction.match(/\-/g) || []).length;
-      switch (direction) {
-        case "N":
-          position[1] += move;
-          break;
-        case "E":
-          position[0] += move;
-          break;
-        case "S":
-          position[1] -= move;
-          break;
-        case "W":
-          position[0] -= move;
-          break;
-        default:
-          break;
-      }
+
+      position = moveDrone(position, instruction, direction);
     }
     //Check for directional movement then move the drone the total number of +'s and -'s after summing them
     else if (directions.includes(instruction[0])) {
-      let move =
-        (instruction.match(/\+/g) || []).length -
-        (instruction.match(/\-/g) || []).length;
-      switch (instruction[0]) {
-        case "N":
-          position[1] += move;
-          break;
-        case "E":
-          position[0] += move;
-          break;
-        case "S":
-          position[1] -= move;
-          break;
-        case "W":
-          position[0] -= move;
-          break;
-        default:
-          break;
-      }
+      position = moveDrone(position, instruction, instruction[0]);
     }
   });
+
+  //Function for movement so I dont repeat code for cardinal and rotation
+  moveDrone = (position, instruction, cardinal) => {
+    let newPosi = position.concat();
+
+    //Find the distance the drone is moving (positive or negative)
+    let move =
+      (instruction.match(/\+/g) || []).length -
+      (instruction.match(/\-/g) || []).length;
+    //Move the drone the total number of +'s and -'s after summing them
+    switch (cardinal) {
+      case "N":
+        newPosi[1] += move;
+        break;
+      case "E":
+        newPosi[0] += move;
+        break;
+      case "S":
+        newPosi[1] -= move;
+        break;
+      case "W":
+        newPosi[0] -= move;
+        break;
+      default:
+        break;
+    }
+
+    return newPosi;
+  };
 
   return position;
 };
