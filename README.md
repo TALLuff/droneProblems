@@ -10,10 +10,12 @@ complexRoute() takes input in the form of a string such as "S- L- S- L+ R--+ W+ 
 
 ## Running locally
 
-To run this file locally you will need to clone the file and navigate into it, then install the dependencies by typing `npm install` into your console.
+To run this file locally you will need to clone the file and navigate into it, then install the dependencies by typing `npm install` into your console. You will then have access to require it into your file.
 
 ## Testing
 
-I tested using Jest which can be run by typing `npm test` in your console.
+To test please install Jest by typing `npm install --save-dev jest` into your console.
+Run the tests by typing `npm test`.
 
-*Made by Tommy Luff :D*
+
+###### *Made by Tommy Luff :D*
