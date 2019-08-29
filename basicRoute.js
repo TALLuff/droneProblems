@@ -1,27 +1,41 @@
 const basicRoute = str => {
+  //Set starting positions as stated
   let position = [0, 0];
-  let direction = "n";
+  let direction = "N";
+
+  let directions = ["N", "E", "S", "W"];
 
   let instructions = str.split("");
 
+  //Loop through instructions in order
   instructions.forEach(instruction => {
-    if (instruction === "+") {
+    //Check for movement then use a switch to decide what value to increment depending on rotation
+    if (instruction === "+" || instruction === "-") {
+      let move = instruction === "+" ? 1 : -1;
       switch (direction) {
-        case "n":
-          position[1]++;
+        case "N":
+          position[1] += move;
           break;
-        case "e":
-          position[0]++;
+        case "E":
+          position[0] += move;
           break;
-        case "s":
-          position[1]--;
+        case "S":
+          position[1] -= move;
           break;
-        case "w":
-          position[0]--;
+        case "W":
+          position[0] -= move;
           break;
         default:
           break;
       }
+    }
+    //Check for rotation the move through the array of directions then reassign direction
+    else if (instruction === "L" || instruction === "R") {
+      let rotate = instruction === "L" ? -1 : 1;
+      let dirIndex = directions.indexOf(direction) + rotate;
+      if (dirIndex === -1) dirIndex = 3;
+      if (dirIndex === 5) dirIndex = 0;
+      direction = directions[dirIndex];
     }
   });
 
